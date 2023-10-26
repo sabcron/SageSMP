@@ -1,0 +1,4 @@
+name: SageSMP
+version: '${project.version}'
+main: com.sagesmp.sagesmp.SageSMP
+api-version: '1.20'
