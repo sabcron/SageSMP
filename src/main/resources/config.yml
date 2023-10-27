@@ -1,0 +1,23 @@
+prefix: ""
+PermanentActionBar:
+  Enable: false
+  actionBarMessage: SageSMP
+  duration: 6
+  MessageStyles:
+    isBold: true
+    isItalic: false
+    isUnderline: false
+    isStrikethrough: false
+    isMagic: false
+  ChatColor:
+    - GREEN
+    - YELLOW
+    - AQUA
+    - LIGHT_PURPLE
+    - RED
+    - BLUE
+    - WHITE
+    - MAGIC
+Announcements:
+  Enable: true
+  defaultDuration: 1800

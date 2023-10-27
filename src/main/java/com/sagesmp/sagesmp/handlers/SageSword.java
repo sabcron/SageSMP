@@ -1,4 +1,4 @@
-package com.sagesmp.sagesmp;
+package com.sagesmp.sagesmp.handlers;
 
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;

@@ -1,6 +1,13 @@
-package com.sagesmp.sagesmp;
+package com.sagesmp.sagesmp.handlers;
 
+import com.sagesmp.sagesmp.SageSMP;
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.protection.flags.Flags;
+import com.sk89q.worldguard.protection.flags.StateFlag;
+import com.sk89q.worldguard.protection.managers.RegionManager;
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -12,21 +19,23 @@ public class PVPToggleEventHandler implements Listener {
         final int[] timeLeft = {30 * 60};
 
         if(pvpEnabled) {
-            String world1 = "rg flag __global__ -w world pvp allow";
-            String world2 = "rg flag __global__ -w world_nether pvp allow";
-            String world3 = "rg flag __global__ -w world_the_end pvp allow";
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), world1);
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), world2);
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), world3);
+            String cmd1 = "rg flag __global__ -w world pvp allow";
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd1);
+            String cmd2 = "rg flag __global__ -w world_nether pvp allow";
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd2);
+            String cmd3 = "rg flag __global__ -w world_the_end pvp allow";
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd3);
+
             String announceCommand = "abx announce 1800s &aPVP &lENABLED &f(" + formatTime(timeLeft[0]) + " left)";
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), announceCommand);
         } else {
-            String world1 = "rg flag __global__ -w world pvp deny";
-            String world2 = "rg flag __global__ -w world_nether pvp deny";
-            String world3 = "rg flag __global__ -w world_the_end pvp deny";
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), world1);
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), world2);
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), world3);
+            String cmd1 = "rg flag __global__ -w world pvp deny";
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd1);
+            String cmd2 = "rg flag __global__ -w world_nether pvp deny";
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd2);
+            String cmd3 = "rg flag __global__ -w world_the_end pvp deny";
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd3);
+
             String announceCommand = "abx announce 1800s &cPVP &lDISABLED &f(" + formatTime(timeLeft[0]) + " left)";
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), announceCommand);
         }

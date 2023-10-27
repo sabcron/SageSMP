@@ -5,5 +5,4 @@ This plugin was originally designed by me, SolidSilk, for a Minecraft SMP, the p
 
 # Dependencies:
 WorldEdit,
-WorldGuard,
-ActionBarXtreme
+WorldGuard
