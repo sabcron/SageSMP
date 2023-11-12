@@ -1,5 +1,5 @@
 name: SageSMP
-version: '1.0.1'
+version: '1.0.2'
 main: com.sagesmp.sagesmp.SageSMP
 api-version: '1.20'
 commands:

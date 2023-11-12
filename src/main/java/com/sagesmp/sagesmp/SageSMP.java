@@ -6,10 +6,10 @@ import com.sagesmp.sagesmp.commands.maincmd;
 import com.sagesmp.sagesmp.handlers.PVPToggleEvent;
 import com.sagesmp.sagesmp.handlers.PVPToggleEventHandler;
 import com.sagesmp.sagesmp.handlers.SageSwordRecipe;
+import com.sagesmp.sagesmp.utils.ConfigUpdater;
 import com.sagesmp.sagesmp.utils.logging;
 import com.sagesmp.sagesmp.utils.tabComplete;
 import com.sagesmp.sagesmp.utils.updateCheck;
-import com.tchristofferson.configupdater.ConfigUpdater;
 import net.md_5.bungee.api.ChatMessageType;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -126,7 +126,7 @@ public class SageSMP extends JavaPlugin implements Listener {
 
         NamespacedKey recipeKey = new NamespacedKey(this, "sagesword_recipe");
         new SageSwordRecipe(this, recipeKey);
-        getServer().getPluginManager().registerEvents(new PVPToggleEventHandler(), this);
+        getServer().getPluginManager().registerEvents(new PVPToggleEventHandler(this), this);
         getServer().getPluginManager().registerEvents(this, this);
 
         BukkitRunnable task = new BukkitRunnable() {
@@ -255,6 +255,10 @@ public class SageSMP extends JavaPlugin implements Listener {
                         player.getEnderChest().setItem(slot, new ItemStack(Material.AIR));
                         event.setCancelled(true);
                     }
+                    if(item != null && isEnderPearl(item, player)) {
+                        player.getEnderChest().setItem(slot, new ItemStack(Material.AIR));
+                        event.setCancelled(true);
+                    }
                 }
             }
         }
@@ -268,6 +272,9 @@ public class SageSMP extends JavaPlugin implements Listener {
         if (event.getInventory().getType() == InventoryType.ENDER_CHEST && event.getCurrentItem() != null && event.getCurrentItem().getType() == Material.DRAGON_EGG) {
             event.setCancelled(true);
         }
+        if (event.getInventory().getType() == InventoryType.ENDER_CHEST && event.getCurrentItem() != null && isEnderPearl(event.getCurrentItem(), (Player) event.getWhoClicked()) || event.getInventory().getType() == InventoryType.CHEST && event.getCurrentItem() != null && isEnderPearl(event.getCurrentItem(), (Player) event.getWhoClicked()) || event.getInventory().getType() == InventoryType.SHULKER_BOX && event.getCurrentItem() != null && isEnderPearl(event.getCurrentItem(), (Player) event.getWhoClicked())) {
+            event.setCancelled(true);
+        }
     }
 
     private boolean isSageSword(ItemStack item) {
@@ -277,6 +284,25 @@ public class SageSMP extends JavaPlugin implements Listener {
                 return true;
             }
         }
+        return false;
+    }
+
+    private boolean isEnderPearl(ItemStack item, Player player) {
+        if(item.getType() == Material.ENDER_PEARL) {
+            int maxEnderPearls = 16;
+            int currentCount = 0;
+
+            for (ItemStack inventoryItem : player.getInventory().getContents()) {
+                if (inventoryItem != null && inventoryItem.getType() == org.bukkit.Material.ENDER_PEARL) {
+                    currentCount += inventoryItem.getAmount();
+                }
+            }
+
+            if (currentCount + item.getAmount() > maxEnderPearls) {
+                return true;
+            }
+        }
+
         return false;
     }
 

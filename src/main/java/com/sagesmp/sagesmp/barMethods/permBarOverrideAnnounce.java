@@ -26,8 +26,6 @@ public class permBarOverrideAnnounce implements Runnable {
             return;
         }
 
-        message = plugin.getConfig().getString("prefix") + message;
-
         plugin.permActionBar.stop();
 
         try {

@@ -30,8 +30,7 @@ public class maincmd implements CommandExecutor {
                     strings[0].equalsIgnoreCase("bc") &&
                             strings[1] != null) {
                 if (commandSender.hasPermission("abx.announce")) {
-                    if(plugin.getConfig().getBoolean("Announcements.Enable")) {
-                        int duration = plugin.getConfig().getInt("Announcements.defaultDuration");
+                        int duration = plugin.getConfig().getInt("PVPToggle.duration");
                         if (strings[1].matches("\\d+s")) {
 
                             duration = Integer.parseInt(strings[1].substring(0, strings[1].length() - 1));
@@ -45,9 +44,6 @@ public class maincmd implements CommandExecutor {
 
                         String message = String.join(" ", strings);
                         plugin1.actionbarAnnounce(duration, message);
-                    } else {
-                        commandSender.sendMessage(ChatColor.AQUA + "[SageSMP] " + ChatColor.RESET + ChatColor.RED + "Announcements are disabled in the configuration file.");
-                    }
                 } else {
                     commandSender.sendMessage(ChatColor.RED + "Insufficient Permission.");
                 }
